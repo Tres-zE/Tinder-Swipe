@@ -23,12 +23,12 @@
             </article>
         </div>
 
-        <footer>
-            <button aria-label=""></button>
-            <button aria-label=""></button>
-            <button aria-label=""></button>
-            <button aria-label=""></button>
-            <button aria-label=""></button>
+        <footer> <!-- paso 5: botones del footer  -->
+            <button class="is-undo" aria-label="undo"></button>
+            <button class="is-remove is-big" aria-label="remove"></button>
+            <button class="is-star" aria-label="star"></button>
+            <button class="is-fav is-big" aria-label="fav"></button>
+            <button class="is-zap" aria-label="zap"></button>
         </footer>
     </section>
 </main>
@@ -83,7 +83,7 @@
             height: 24px;
         }
     }
-
+    
     footer{
         display: grid;
         /*importante: podemos escribirlo asi
@@ -93,12 +93,50 @@
         padding: 0 24px;
         justify-content: center;
         align-items: center;
-
+    
+        /*paso 6:tecnica de google para las imagenes...sprite...aunque normalmente se usan svg pero es una tecnica milenaria*/
         & button{
+            background: url('./tinder-icons.webp') no-repeat;
+            background-position: 0px 0px;
+            background-size: 175px;
             height: 32px;
             width: 32px;
             border-radius: 50%;
-            border: 1px solid #ccc;
+            border: 0;
+            cursor: pointer;
+            transition: scale .3s ease;
+
+
+            &:hover{
+                scale:1.4;
+            }
+
+
+            &.is-big{
+                background-size: 250px;
+                width: 48px;
+                height: 48px;
+            }
+
+            &.is-undo{
+                /*recorremos la imagen para cargar el icono que queremos*/
+                                /*horizontal--vertical*/
+                background-position: -140px 0;
+            }
+
+            &.is-remove{
+                background-position: -150px 0;
+            }
+
+            &.is-fav{
+                background-position: -50px 0;
+            }
+
+            &.is-star{
+                background-position: -70px 0;
+            }
+            /*para el zap ya esta por defecto al cargar la imagen*/
+
         }
     }
 
