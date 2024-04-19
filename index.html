@@ -200,6 +200,11 @@
         const actualCard = event.target.closest('article')
 
         //paso 7.2: obtenemos la posicion inicial del mause o del dedo
-        console.log(event)
+        //vemos algunas propiedades con console.log(event)
+        const startX = event.pageX ?? event.touches[0].pageX
     }
+
+    //paso 7.3: dejamos en segundo palno el movimiento por defecto
+    document.addEventListener('mousedown', startDrag)
+    document.addEventListener('touchstart', startDrag, {passive: true})
 </script>
