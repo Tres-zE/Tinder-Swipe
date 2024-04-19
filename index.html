@@ -186,3 +186,20 @@
         }
     }
 </style>
+
+<!-- paso 7 drag swipe--JS -->
+<script>
+    //checamos el movimiento de las cards
+    let isAnimating = false
+    let pullDeltaX = 0 //distancia que la card se esta arrastrando
+
+    function startDrag(event) {
+        if(isAnimating) return
+
+        //paso 7.1: recuperamos el primer elemento article del html, osease que recuperamos el article mas cercano al arrastrar
+        const actualCard = event.target.closest('article')
+
+        //paso 7.2: obtenemos la posicion inicial del mause o del dedo
+        console.log(event)
+    }
+</script>
