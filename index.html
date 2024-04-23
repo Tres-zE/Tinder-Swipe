@@ -202,6 +202,48 @@
         //paso 7.2: obtenemos la posicion inicial del mause o del dedo
         //vemos algunas propiedades con console.log(event)
         const startX = event.pageX ?? event.touches[0].pageX
+
+        //paso 7.3 movimientos del touch y del mouse
+        document.addEventListener('mousemove', onMove)
+        document.addEventListener('mouseup', onEnd)
+
+        document.addEventListener('touchmove', onMove, {passive: true})
+        document.addEventListener('touchend', onEnd, {passive: true})
+
+        function onMove(event){
+            //current position del mouse or finger
+            const currentX = event.pageX ?? event.touches[0].pageX
+            //distancia que ha recorrido el dedo o el mouse
+            pullDeltaX = currentX - startX
+            //no hay distancia recorrida
+            if(pullDeltaX === 0) return
+            //cambiando la bandera para indicar la animacion
+            isAnimating = true
+            //movimiento de la card en grados
+            const deg = pullDeltaX / 10
+            //aplicando transformacion a la card
+            actualCard.style.transform = `translateX(${pullDeltaX}px) rotate(${deg}deg)`
+            //camboando el cursor a grabbing
+            actualCard.style.cursor = 'grabbing'
+        }
+
+        function onEnd(event){
+            //limpiamos los eventos
+            document.removeEventListener('mousemove', onMove)
+            document.removeEventListener('mouseup', onEnd)
+
+            document.removeEventListener('touchmove', onMove)
+            document.removeEventListener('touchend', onEnd)
+
+            //limpiamos las banderas
+            isAnimating = false
+            //reseteamos la distancia
+            pullDeltaX = 0
+            //reseteamos la transformacion
+            actualCard.style.transform = 'none'
+            //reseteamos el cursor
+            actualCard.style.cursor = 'grab'
+        }
     }
 
     //paso 7.3: dejamos en segundo palno el movimiento por defecto
