@@ -158,6 +158,25 @@
             height: 100%;
             z-index: 2;
 
+            /*paso 8: animacion al deslizar la imagen*/
+            &.go-left{
+                transform: translateX(-150%) rotate(-30deg) !important;
+            }
+
+            &.go-right{
+                transform: translateX(150%) rotate(30deg) !important;
+            }
+
+            &.go-left,
+            &.go-right{
+                transition: transform .3s ease, rotate .3s ease;
+            }
+
+            &.reset{
+                transition: transform .3s ease;
+                transform: translateX(0) !important;
+            }
+
             & img{
                 width: 100%;
                 height: 100%;
@@ -189,6 +208,8 @@
 
 <!-- paso 7 drag swipe--JS -->
 <script>
+    //paso 9: saber si toma o no una decision
+    const DECISION_THRESHOLD = 75
     //checamos el movimiento de las cards
     let isAnimating = false
     let pullDeltaX = 0 //distancia que la card se esta arrastrando
@@ -235,14 +256,26 @@
             document.removeEventListener('touchmove', onMove)
             document.removeEventListener('touchend', onEnd)
 
-            //limpiamos las banderas
+            /*mejoramos esta parte de codigo
+            limpiamos las banderas
             isAnimating = false
             //reseteamos la distancia
             pullDeltaX = 0
             //reseteamos la transformacion
             actualCard.style.transform = 'none'
             //reseteamos el cursor
-            actualCard.style.cursor = 'grab'
+            actualCard.style.cursor = 'grab'*/
+            // paso 9.1: saber si el usuario tomo una decision
+            const decisionMade = Math.abs(pullDeltaX) >= DECISION_THRESHOLD
+
+            if (decisionMade) {
+                const goRight = pullDeltaX >= 0
+                const goLeft = !goRight
+                //añadimos la clase de la decision
+                actualCard.classList.add(goRight ? 'go-right' : 'go-left')
+            } else {
+                
+            }
         }
     }
 
