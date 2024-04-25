@@ -273,9 +273,22 @@
                 const goLeft = !goRight
                 //añadimos la clase de la decision
                 actualCard.classList.add(goRight ? 'go-right' : 'go-left')
+                actualCard.addEventListener('transitionend', () =>{
+                    actualCard.remove()
+                })
             } else {
-                
+                actualCard.classList.add('reset')
+                actualCard.classList.remove('go-right', 'go-left')
             }
+
+            //paso 10: reset the variables
+            actualCard.addEventListener('transitionend', () =>{
+                actualCard.removeAttribute('style')
+                actualCard.classList.remove('reset')
+
+                pullDeltaX = 0
+                isAnimating = false
+            })
         }
     }
 
