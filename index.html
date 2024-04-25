@@ -21,6 +21,11 @@
                 <div class="choice nope">NOPE</div>
                 <div class="choice like">LIKE</div>
             </article>
+
+            <span>
+                No hay más personas cerca de ti... <br>
+                Vuelve a intentarlo más tarde
+            </span>
         </div>
 
         <footer> <!-- paso 5: botones del footer  -->
@@ -146,6 +151,16 @@
         width: 100%;
         height: 100%;
         margin: 0 auto;
+
+        & > span{
+            display: grid;
+            place-content: center;
+            color: #777;
+            font-size: 14px;
+            text-align: center;
+            height: 100%;
+            z-index: -1;
+        }
 
         & article{
             border-radius: 8px;
