@@ -267,6 +267,7 @@
 
         //paso 7.1: recuperamos el primer elemento article del html, osease que recuperamos el article mas cercano al arrastrar
         const actualCard = event.target.closest('article')
+        if(!actualCard) return
 
         //paso 7.2: obtenemos la posicion inicial del mause o del dedo
         //vemos algunas propiedades con console.log(event)
